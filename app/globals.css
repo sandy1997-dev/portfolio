@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Manrope:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --font-playfair: 'Playfair Display', serif;
+  --font-manrope: 'Manrope', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #080808;
+  color: #f0ede8;
+  font-family: var(--font-manrope), sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #080808; }
+::-webkit-scrollbar-thumb { background: #1f1f1f; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #c8ff00; }
+
+/* Custom cursor */
+.cursor {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: #c8ff00;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, opacity 0.3s;
+  will-change: left, top;
+}
+
+.cursor-follower {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(200, 255, 0, 0.35);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width 0.35s, height 0.35s, opacity 0.35s;
+  will-change: left, top;
+}
+
+.cursor.hovered { width: 22px; height: 22px; opacity: 0.7; }
+.cursor-follower.hovered { width: 64px; height: 64px; opacity: 0.2; }
+
+/* Section reveal */
+.reveal-text {
+  overflow: hidden;
+}
+
+.reveal-text span {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.reveal-text.visible span {
+  transform: translateY(0);
+}
+
+/* Stagger delays */
+.delay-1 { transition-delay: 0.1s !important; }
+.delay-2 { transition-delay: 0.2s !important; }
+.delay-3 { transition-delay: 0.3s !important; }
+.delay-4 { transition-delay: 0.4s !important; }
+.delay-5 { transition-delay: 0.5s !important; }
+
+/* Fade up reveal */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s cubic-bezier(0.76, 0, 0.24, 1),
+              transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Marquee */
+.marquee-wrapper {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-track {
+  display: inline-flex;
+  animation: marquee 35s linear infinite;
+  will-change: transform;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Loader */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #080808;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  transition: opacity 0.9s ease, visibility 0.9s ease;
+}
+
+#loader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Project hover lines */
+.project-row::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: #c8ff00;
+  transform: scaleY(0);
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+  transform-origin: bottom;
+}
+
+.project-row:hover::before {
+  transform: scaleY(1);
+}
+
+/* Button hover fill */
+.btn-fill {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #080808;
+  transform: translateY(101%);
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.btn-fill:hover::after {
+  transform: translateY(0);
+}
+
+.btn-fill:hover {
+  color: #c8ff00;
+}
+
+.btn-fill span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Nav blend */
+.nav-blend {
+  mix-blend-mode: difference;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  transform: translateY(-100%);
+  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.mobile-menu.open {
+  transform: translateY(0);
+}
