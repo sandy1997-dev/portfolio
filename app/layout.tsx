@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Your Name — MERN Stack Developer",
+  title: "Sandeep Kumar Pati — MERN Stack Developer",
   description:
     "Full-stack MERN developer building beautiful, scalable web applications with React, Node.js, MongoDB & Express.",
   keywords: ["MERN", "React", "Next.js", "Full Stack Developer", "Portfolio"],
-  authors: [{ name: "Your Name" }],
+  authors: [{ name: "Sandeep Kumar Pati" }],
   openGraph: {
-    title: "Your Name — MERN Stack Developer",
+    title: "Sandeep Kumar Pati — MERN Stack Developer",
     description: "Full-stack MERN developer building beautiful, scalable web applications.",
     type: "website",
   },

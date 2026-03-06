@@ -57,14 +57,14 @@ export default function About() {
             {[
               <>
                 Hey! I&apos;m{" "}
-                <strong className="text-cream font-medium">Your Name</strong>, a
+                <strong className="text-cream font-medium">Sandeep Kumar Pati</strong>, a
                 passionate MERN stack developer who believes great software lives
                 at the intersection of{" "}
                 <strong className="text-cream font-medium">clean code</strong> and{" "}
                 <strong className="text-cream font-medium">thoughtful design</strong>.
               </>,
               <>
-                With <strong className="text-cream font-medium">3+ years</strong>{" "}
+                With <strong className="text-cream font-medium">1+ years</strong>{" "}
                 of experience building full-stack applications, I&apos;ve shipped
                 SaaS platforms, e-commerce systems, real-time apps, and developer
                 tools — always focused on performance, scalability, and UX.
@@ -138,7 +138,7 @@ export default function About() {
               className="font-display font-black text-border select-none"
               style={{ fontSize: "clamp(5rem, 10vw, 8rem)", letterSpacing: "-0.05em" }}
             >
-              YN
+              Sandeep Kumar Pati
             </span>
 
             {/* Gradient overlay */}
@@ -153,12 +153,12 @@ export default function About() {
             {/* Location tag */}
             <div className="absolute bottom-5 left-5 bg-black border border-border px-4 py-2 text-[0.7rem] tracking-[0.08em] text-muted">
               Based in{" "}
-              <strong className="text-accent font-medium">Your City, Country</strong>
+              <strong className="text-accent font-medium">Pune,MH,IN</strong>
             </div>
 
             {/* Experience badge */}
             <div className="absolute top-5 right-5 bg-accent text-black text-[0.65rem] tracking-[0.1em] font-bold uppercase px-3 py-1.5">
-              3+ Yrs
+              1+ Yrs
             </div>
           </div>
 

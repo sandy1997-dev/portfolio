@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const NAME = "YourName";
+const NAME = "Sandeep Kumar Pati";
 
 export default function Loader() {
   const [loaded, setLoaded] = useState(false);

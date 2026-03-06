@@ -41,7 +41,7 @@ export default function Navbar() {
           className="font-display text-lg font-bold tracking-tight text-cream hover:text-accent transition-colors duration-200"
           onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
         >
-          YN<span className="text-accent">.</span>
+          Sandeep<span className="text-accent">.</span>
         </a>
 
         {/* Desktop nav */}
@@ -60,7 +60,7 @@ export default function Navbar() {
 
         {/* Resume button */}
         <a
-          href="/resume.pdf"
+          href="/sandeep kiumar pati-CV.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="hidden md:inline-flex items-center gap-2 text-[0.7rem] tracking-[0.12em] uppercase bg-cream text-black px-5 py-2.5 font-semibold hover:bg-accent transition-colors duration-200"

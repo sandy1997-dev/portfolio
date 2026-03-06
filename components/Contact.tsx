@@ -7,26 +7,56 @@ import { useState } from "react";
 export default function Contact() {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Add your form submission logic here (e.g., EmailJS, Resend, Formspree)
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
-    setForm({ name: "", email: "", message: "" });
+    setStatus("sending");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (res.ok) {
+        setStatus("sent");
+        setForm({ name: "", email: "", message: "" });
+        setTimeout(() => setStatus("idle"), 6000);
+      } else {
+        const data = await res.json();
+        console.error("Error:", data.error);
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 5000);
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
   };
 
   const fadeUp = (delay = 0) => ({
     initial: { opacity: 0, y: 30 },
     animate: inView ? { opacity: 1, y: 0 } : {},
-    transition: { duration: 0.9, delay, ease: [0.76, 0, 0.24, 1] as [number, number, number, number] },
+    transition: {
+      duration: 0.9,
+      delay,
+      ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
+    },
   });
+
+  const inputClass =
+    "bg-card border border-border px-5 py-4 text-cream text-[0.9rem] outline-none focus:border-accent transition-colors duration-200 placeholder:text-muted/40 font-body w-full";
+
+  const labelClass = "text-[0.62rem] tracking-[0.2em] uppercase text-muted";
 
   return (
     <section id="contact" className="bg-black px-6 md:px-[5vw] py-28 md:py-36" ref={ref}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-        {/* Left */}
+
+        {/* ── LEFT ── */}
         <div>
           <motion.div className="flex items-center gap-4 mb-10" {...fadeUp(0)}>
             <span className="text-[0.65rem] tracking-[0.22em] uppercase text-accent">
@@ -46,6 +76,7 @@ export default function Contact() {
               Let&apos;s Build
             </motion.h2>
           </div>
+
           <div className="overflow-hidden mb-8">
             <motion.h2
               className="font-display font-black italic text-accent tracking-tight leading-[0.9]"
@@ -58,21 +89,24 @@ export default function Contact() {
             </motion.h2>
           </div>
 
-          <motion.p className="text-muted text-[0.92rem] leading-[1.85] mb-10 max-w-sm" {...fadeUp(0.3)}>
+          <motion.p
+            className="text-muted text-[0.92rem] leading-[1.85] mb-10 max-w-sm"
+            {...fadeUp(0.3)}
+          >
             Have a project in mind? Looking for a developer to join your team?
             Or just want to say hello — my inbox is always open.
           </motion.p>
 
           <motion.a
-            href="mailto:hello@yourname.dev"
-            className="group block font-display font-bold text-cream border-b border-border pb-4 mb-2 hover:text-accent hover:border-accent transition-all duration-300"
-            style={{ fontSize: "clamp(1rem, 2.2vw, 1.6rem)", letterSpacing: "-0.02em" }}
+            href="mailto:sandeepkumar.pati1997@gmail.com"
+            className="group block font-display font-bold text-cream border-b border-border pb-4 mb-2 hover:text-accent hover:border-accent transition-all duration-300 break-all"
+            style={{ fontSize: "clamp(0.85rem, 1.6vw, 1.2rem)", letterSpacing: "-0.01em" }}
             {...fadeUp(0.4)}
           >
-            <span className="inline-flex items-center gap-3">
-              hello@yourname.dev
+            <span className="inline-flex items-center gap-3 flex-wrap">
+              sandeepkumar.pati1997@gmail.com
               <svg
-                className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 opacity-0 group-hover:opacity-100"
+                className="w-4 h-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
                 viewBox="0 0 16 16"
                 fill="none"
               >
@@ -89,75 +123,147 @@ export default function Contact() {
 
           {/* Socials */}
           <motion.div className="flex flex-wrap gap-6 mt-10" {...fadeUp(0.5)}>
-            {["GitHub", "LinkedIn", "Twitter", "Dribbble"].map((s) => (
+            {[
+              { label: "GitHub", href: "https://github.com/sandy1997-dev" },
+              { label: "LinkedIn", href: "#" },
+              { label: "Twitter", href: "#" },
+              { label: "Dribbble", href: "#" },
+            ].map(({ label, href }) => (
               <a
-                key={s}
-                href="#"
+                key={label}
+                href={href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[0.7rem] tracking-[0.14em] uppercase text-muted hover:text-accent transition-colors duration-200"
               >
-                {s}
+                {label}
               </a>
             ))}
           </motion.div>
         </div>
 
-        {/* Right: Form */}
-        <motion.form
-          onSubmit={handleSubmit}
-          className="flex flex-col gap-6"
-          {...fadeUp(0.25)}
-        >
-          <div className="flex flex-col gap-2">
-            <label className="text-[0.62rem] tracking-[0.2em] uppercase text-muted">
-              Your Name
-            </label>
-            <input
-              type="text"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              placeholder="Jane Smith"
-              required
-              className="bg-card border border-border px-5 py-4 text-cream text-[0.9rem] outline-none focus:border-accent transition-colors duration-200 placeholder:text-border font-body"
-            />
-          </div>
+        {/* ── RIGHT: FORM ── */}
+        <motion.div {...fadeUp(0.25)}>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate>
 
-          <div className="flex flex-col gap-2">
-            <label className="text-[0.62rem] tracking-[0.2em] uppercase text-muted">
-              Email Address
-            </label>
-            <input
-              type="email"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              placeholder="jane@example.com"
-              required
-              className="bg-card border border-border px-5 py-4 text-cream text-[0.9rem] outline-none focus:border-accent transition-colors duration-200 placeholder:text-border font-body"
-            />
-          </div>
+            {/* Name */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="name" className={labelClass}>
+                Your Name
+              </label>
+              <input
+                id="name"
+                type="text"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                placeholder="Sandeep Kumar"
+                required
+                disabled={status === "sending"}
+                className={inputClass}
+              />
+            </div>
 
-          <div className="flex flex-col gap-2">
-            <label className="text-[0.62rem] tracking-[0.2em] uppercase text-muted">
-              Message
-            </label>
-            <textarea
-              value={form.message}
-              onChange={(e) => setForm({ ...form, message: e.target.value })}
-              placeholder="Tell me about your project..."
-              required
-              rows={6}
-              className="bg-card border border-border px-5 py-4 text-cream text-[0.9rem] outline-none focus:border-accent transition-colors duration-200 placeholder:text-border resize-none font-body"
-            />
-          </div>
+            {/* Email */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="email" className={labelClass}>
+                Email Address
+              </label>
+              <input
+                id="email"
+                type="email"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                placeholder="you@example.com"
+                required
+                disabled={status === "sending"}
+                className={inputClass}
+              />
+            </div>
 
-          <button
-            type="submit"
-            className="btn-fill self-start bg-accent text-black font-body font-semibold text-[0.78rem] tracking-[0.12em] uppercase px-8 py-4 hover:text-accent transition-colors duration-300"
-          >
-            <span>{sent ? "Message Sent ✓" : "Send Message ↗"}</span>
-          </button>
-        </motion.form>
+            {/* Message */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="message" className={labelClass}>
+                Message
+              </label>
+              <textarea
+                id="message"
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                placeholder="Tell me about your project..."
+                required
+                rows={6}
+                disabled={status === "sending"}
+                className={`${inputClass} resize-none`}
+              />
+            </div>
+
+            {/* Submit button */}
+            <button
+              type="submit"
+              disabled={status === "sending" || status === "sent"}
+              className={`btn-fill self-start font-body font-semibold text-[0.78rem] tracking-[0.12em] uppercase px-8 py-4 transition-all duration-300 disabled:cursor-not-allowed ${
+                status === "sent"
+                  ? "bg-accent text-black"
+                  : status === "error"
+                  ? "bg-red-500 text-white"
+                  : status === "sending"
+                  ? "bg-accent/50 text-black"
+                  : "bg-accent text-black hover:text-accent"
+              }`}
+            >
+              <span>
+                {status === "sending" && "⏳ Sending..."}
+                {status === "sent"    && "✓ Message Sent!"}
+                {status === "error"   && "✕ Failed — Retry"}
+                {status === "idle"    && "Send Message ↗"}
+              </span>
+            </button>
+
+            {/* Success */}
+            {status === "sent" && (
+              <motion.div
+                className="flex items-start gap-3 p-4 border border-accent/30 bg-accent/5"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <span className="text-accent text-lg leading-none">✓</span>
+                <div>
+                  <p className="text-cream text-[0.85rem] font-medium mb-0.5">
+                    Message sent successfully!
+                  </p>
+                  <p className="text-muted text-[0.78rem]">
+                    I&apos;ll get back to you at your email within 24 hours.
+                  </p>
+                </div>
+              </motion.div>
+            )}
+
+            {/* Error */}
+            {status === "error" && (
+              <motion.div
+                className="flex items-start gap-3 p-4 border border-red-500/30 bg-red-500/5"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <span className="text-red-400 text-lg leading-none">✕</span>
+                <div>
+                  <p className="text-cream text-[0.85rem] font-medium mb-0.5">
+                    Something went wrong.
+                  </p>
+                  <p className="text-muted text-[0.78rem]">
+                    Email me directly at{" "}
+                    <a
+                      href="mailto:sandeepkumar.pati1997@gmail.com"
+                      className="text-accent underline"
+                    >
+                      sandeepkumar.pati1997@gmail.com
+                    </a>
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </form>
+        </motion.div>
       </div>
     </section>
   );
