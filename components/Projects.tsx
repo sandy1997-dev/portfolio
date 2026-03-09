@@ -10,25 +10,25 @@ const PROJECTS = [
     title: "Shopify-Style E-Commerce",
     desc: "Full-stack MERN store with product management, Stripe payments, cart, orders & admin dashboard.",
     tags: ["React", "Node.js", "MongoDB", "Stripe"],
-    year: "2024",
-    link: "#",
-    github: "#",
+    year: "2026",
+    link: "https://shopmern-ecommerce.vercel.app/",
+    github: "https://github.com/sandy1997-dev/shopmern-ecommerce",
   },
   {
     num: "02",
     title: "Real-Time Chat App",
     desc: "Slack-inspired messaging platform with Socket.io, channels, file uploads & push notifications.",
     tags: ["Socket.io", "Express", "React", "JWT"],
-    year: "2024",
-    link: "#",
-    github: "#",
+    year: "2026",
+    link: "https://nexus-chat-chi.vercel.app/",
+    github: "https://github.com/sandy1997-dev/nexus-chat",
   },
   {
     num: "03",
     title: "Project Management SaaS",
     desc: "Trello-style task board with drag-and-drop, team collaboration, and analytics dashboard.",
     tags: ["Next.js", "GraphQL", "MongoDB", "Prisma"],
-    year: "2023",
+    year: "2026",
     link: "#",
     github: "#",
   },
@@ -37,7 +37,7 @@ const PROJECTS = [
     title: "Fintech Dashboard",
     desc: "Personal finance tracker with budget analytics, expense categories, and beautiful D3.js charts.",
     tags: ["React", "D3.js", "Node.js", "PostgreSQL"],
-    year: "2023",
+    year: "2026",
     link: "#",
     github: "#",
   },
@@ -46,7 +46,7 @@ const PROJECTS = [
     title: "Developer Blog CMS",
     desc: "Headless CMS with Next.js, MDX support, syntax highlighting, and full SEO optimization.",
     tags: ["Next.js", "MDX", "Tailwind", "Vercel"],
-    year: "2023",
+    year: "2026",
     link: "#",
     github: "#",
   },
@@ -185,7 +185,7 @@ export default function Projects() {
         transition={{ delay: 0.9, duration: 0.8 }}
       >
         <a
-          href="https://github.com"
+          href="https://github.com/sandy1997-dev/"
           target="_blank"
           rel="noopener noreferrer"
           className="group flex items-center gap-3 text-[0.72rem] tracking-[0.14em] uppercase text-muted hover:text-cream transition-colors duration-200 border border-border hover:border-accent px-8 py-4"
