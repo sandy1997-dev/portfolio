@@ -28,31 +28,35 @@ export default function Loader() {
       {!loaded && (
         <motion.div
           id="loader"
-          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-8 bg-black"
+          // Using px-6 to ensure content doesn't touch screen edges on tiny devices
+          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-6 md:gap-8 bg-black px-6"
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
         >
           {/* Name reveal */}
-          <div className="flex gap-[0.05em] overflow-hidden">
+          {/* Changed whitespace-nowrap and tracking to keep letters together */}
+          <div className="flex flex-wrap justify-center gap-[0.02em] overflow-hidden whitespace-nowrap">
             {NAME.split("").map((char, i) => (
               <motion.span
                 key={i}
-                className="font-display text-5xl md:text-7xl font-black text-cream leading-none"
+                // Responsive font sizes: text-3xl (mobile) -> text-5xl (tablet) -> text-7xl (desktop)
+                className="font-display text-3xl sm:text-5xl md:text-7xl font-black text-cream leading-none inline-block"
                 initial={{ y: "110%" }}
                 animate={{ y: 0 }}
                 transition={{
                   duration: 0.7,
-                  delay: i * 0.06,
+                  delay: i * 0.04, // Slightly faster delay for smoother feel
                   ease: [0.76, 0, 0.24, 1],
                 }}
               >
-                {char}
+                {char === " " ? "\u00A0" : char}
               </motion.span>
             ))}
           </div>
 
           {/* Progress bar */}
-          <div className="w-48 h-px bg-border overflow-hidden">
+          {/* Changed w-48 (fixed) to w-full max-w-[200px] for fluidity */}
+          <div className="w-full max-w-[150px] md:max-w-[240px] h-px bg-white/20 overflow-hidden">
             <motion.div
               className="h-full bg-accent"
               style={{ width: `${progress}%` }}
@@ -62,7 +66,7 @@ export default function Loader() {
 
           {/* Progress number */}
           <motion.span
-            className="font-body text-xs tracking-[0.2em] text-muted"
+            className="font-body text-[10px] md:text-xs tracking-[0.2em] text-muted uppercase"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}

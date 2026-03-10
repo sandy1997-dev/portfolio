@@ -29,8 +29,8 @@ const PROJECTS = [
     desc: "Trello-style task board with drag-and-drop, team collaboration, and analytics dashboard.",
     tags: ["Next.js", "GraphQL", "MongoDB", "Prisma"],
     year: "2026",
-    link: "#",
-    github: "#",
+    link: "https://projectflow-lime.vercel.app/",
+    github: "https://github.com/sandy1997-dev/projectflow",
   },
   {
     num: "04",
@@ -38,8 +38,8 @@ const PROJECTS = [
     desc: "Personal finance tracker with budget analytics, expense categories, and beautiful D3.js charts.",
     tags: ["React", "D3.js", "Node.js", "PostgreSQL"],
     year: "2026",
-    link: "#",
-    github: "#",
+    link: "https://fintech-dashboard-pink.vercel.app/",
+    github: "https://github.com/sandy1997-dev/fintech-dashboard",
   },
   {
     num: "05",

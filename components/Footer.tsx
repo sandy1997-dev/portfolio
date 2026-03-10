@@ -8,7 +8,7 @@ export default function Footer() {
       <p className="text-[0.72rem] text-muted tracking-[0.06em]">
         © {year}{" "}
         <a href="#" className="text-accent hover:text-cream transition-colors duration-200">
-          YourName
+          Sandeep
         </a>{" "}
         — Designed & Built with ♥
       </p>

@@ -125,9 +125,8 @@ export default function Contact() {
           <motion.div className="flex flex-wrap gap-6 mt-10" {...fadeUp(0.5)}>
             {[
               { label: "GitHub", href: "https://github.com/sandy1997-dev" },
-              { label: "LinkedIn", href: "#" },
-              { label: "Twitter", href: "#" },
-              { label: "Dribbble", href: "#" },
+              { label: "LinkedIn", href: "www.linkedin.com/in/sandeep-kumar-pati-b49976189" },
+              { label: "X", href: "https://x.com/KumarSande7673" },
             ].map(({ label, href }) => (
               <a
                 key={label}
