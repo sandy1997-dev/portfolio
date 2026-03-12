@@ -47,8 +47,8 @@ const PROJECTS = [
     desc: "Headless CMS with Next.js, MDX support, syntax highlighting, and full SEO optimization.",
     tags: ["Next.js", "MDX", "Tailwind", "Vercel"],
     year: "2026",
-    link: "#",
-    github: "#",
+    link: "https://devblog-cms-one.vercel.app/",
+    github: "https://github.com/sandy1997-dev/devblog-cms",
   },
 ];
 
