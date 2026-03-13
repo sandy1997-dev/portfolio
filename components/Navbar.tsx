@@ -60,7 +60,7 @@ export default function Navbar() {
 
         {/* Resume button */}
         <a
-          href="/sandeep kiumar pati-CV.pdf"
+          href="/SANDEEP KUMAR PATI CV NEW.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="hidden md:inline-flex items-center gap-2 text-[0.7rem] tracking-[0.12em] uppercase bg-cream text-black px-5 py-2.5 font-semibold hover:bg-accent transition-colors duration-200"
